@@ -8,6 +8,18 @@
   </div>
 </template>
 
+<script>
+export default {
+  /*
+  created() {
+    if (!this.$store.state.userToken) {
+      this.$router.push('/login');
+    }
+  }
+  */
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
