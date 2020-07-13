@@ -10,7 +10,18 @@ window.$ = window.jQuery = require('jquery');
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+//CUSTOM CSS
+import '@/css/main.css'
+
 Vue.config.productionTip = false
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !store.state.userToken) {
+    next({ name: 'Login' })
+  } else { 
+    next()
+  }
+})
 
 new Vue({
   router,
