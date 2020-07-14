@@ -22,13 +22,19 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'Login',
     component: () => import('../components/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../components/Register.vue')
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  allowedForGuest: ['Login', 'Register']
 })
 
 export default router

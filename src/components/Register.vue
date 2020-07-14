@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
-            <div class="card-header">Login</div>
+            <div class="card-header">Register</div>
             <div class="card-body">
               <validation-observer v-slot="{ handleSubmit }" tag="div" ref="loginForm">
                 <form @submit.prevent="handleSubmit(login)" class="newsletter-form">
@@ -130,11 +130,11 @@ localize({
     },
     fields: {
       email: {
-        required: 'E-mail is rerquired!',
-        email: 'It is not a valid email!'
+        required: "E-mail is rerquired!",
+        email: "It is not a valid email!"
       },
       password: {
-        required: 'Password is requied!'
+        required: "Password is requied!"
       }
     }
   },
@@ -144,11 +144,11 @@ localize({
     },
     fields: {
       email: {
-        required: 'Add meg az e-mail címet!',
-        email: 'Nem tűnik valós email címnek!'
+        required: "Add meg az e-mail címet!",
+        email: "Nem tűnik valós email címnek!"
       },
       password: {
-        required: 'Add meg a jelszót!'
+        required: "Add meg a jelszót!"
       }
     }
   }
@@ -180,31 +180,32 @@ export default {
   },
   methods: {
     login: function() {
+      let axiosParams = {
+        language_id: this.$store.state.language.id
+      };
+
+      if (this.$store.state.userToken) {
+        axiosParams.token = this.$store.state.userToken;
+      }
+
+      console.log(axiosParams);
+
       axios
-        .post(this.$apiLink + "login", {
-          email: this.loginForm.email,
-          password: this.loginForm.password,
-          params: {
-            language_id: 1
+        .post(
+          this.$apiLink + "register",
+          {
+            email: this.loginForm.email,
+            password: this.loginForm.password
+          },
+          {
+            params: axiosParams
           }
-        })
+        )
         .then(response => {
-          if (response.data.token) {
-            //this.$store.state.userToken = response.data.token;
-            this.noUser = false;
-            this.$store.dispatch("setUserToken", response.data.token);
-            this.$store.dispatch("setLoggedIn", true);
-            this.$router.push("/");
-          } else {
-            this.noUser = true;
-            this.$store.dispatch("setUserToken", '');
-            this.$store.dispatch("setLoggedIn", false);
-          }
+          console.log("siker", response);
         })
-        .catch(function(error) {
-          console.log(error);
-          this.$store.dispatch("setUserToken", '');
-          this.$store.dispatch("setLoggedIn", false);
+        .catch(error => {
+          console.log("hiba", error.response.data.error);
         })
         .finally(function() {
           // always executed
