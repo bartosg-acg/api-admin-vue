@@ -2,6 +2,11 @@
   color: red;
 }
 
+.main-header {
+  min-height: 30px;
+  background: #2a2a2e;
+}
+
 #main-area {
   -webkit-transition: margin-left 0.3s;
   transition: margin-left 0.3s;

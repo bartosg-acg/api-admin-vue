@@ -27,7 +27,7 @@ Vue.component('empty-layout', EmptyLayout);
 Vue.config.productionTip = false
 
 Vue.prototype.$apiLink = 'http://acgapi.local/univer/';
-
+/*
 router.beforeEach((to, from, next) => {
 
   if (!router.options.allowedForGuest.includes(to.name) && !store.state.loggedIn) {
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
   }
 
 })
-
+*/
 new Vue({
   router,
   store,

@@ -13,11 +13,13 @@ export default {
   },
   computed: {
     layout() {
+      /*
       if (!this.$store.state.loggedIn) {
         return "empty-layout";
       } else {
+        */
         return "default-layout";
-      }
+      //}
     }
   },
   created() {}
