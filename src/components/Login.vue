@@ -84,7 +84,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import apiHandlerMI from '@/mixins/apiHandlerMI.js';
 
 import {
   ValidationProvider,
@@ -174,13 +175,14 @@ export default {
       noUser: false
     };
   },
+  mixins: [apiHandlerMI],
   components: {
     ValidationProvider,
     ValidationObserver
   },
   methods: {
     login: function() {
-      axios
+      this.$axios
         .post(this.$apiLink + "login", {
           email: this.loginForm.email,
           password: this.loginForm.password,
@@ -201,8 +203,8 @@ export default {
             this.$store.dispatch("setLoggedIn", false);
           }
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch(error => {
+          console.log(error.response);
           this.$store.dispatch("setUserToken", '');
           this.$store.dispatch("setLoggedIn", false);
         })

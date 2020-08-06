@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from './setup/router.js'
+import store from './setup/store.js'
+import globalMI from './mixins/globalMI.js';
+import axios from 'axios'
 
 //JQUERY globally
 window.$ = window.jQuery = require('jquery');
@@ -24,10 +26,13 @@ import EmptyLayout from '@/layouts/EmptyLayout.vue'
 Vue.component('default-layout', DefaultLayout);
 Vue.component('empty-layout', EmptyLayout);
 
+Vue.prototype.$axios = axios
+
 Vue.config.productionTip = false
+Vue.mixin(globalMI)
 
 Vue.prototype.$apiLink = 'http://acgapi.local/univer/';
-/*
+
 router.beforeEach((to, from, next) => {
 
   if (!router.options.allowedForGuest.includes(to.name) && !store.state.loggedIn) {
@@ -37,7 +42,7 @@ router.beforeEach((to, from, next) => {
   }
 
 })
-*/
+
 new Vue({
   router,
   store,

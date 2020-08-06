@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import * as CONFIG from '@/setup/init.js';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userToken: '',
+    userToken: undefined,
     loggedIn: false,
     language: {
-      id: 1,
-      code: 'hu'
-    }
+      id: CONFIG.defaultLanguageId,
+      code: CONFIG.defaultLanguageCode
+    },
+    apiCalls: {}
   },
   mutations: {
     SET_USER_TOKEN: (state, token) => {
